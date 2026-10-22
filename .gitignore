@@ -1,0 +1,41 @@
+# ==========================================
+# Archivos de Compilación de Android y Gradle
+# ==========================================
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx/
+*.apk
+*.aab
+*.keystore
+
+# ==========================================
+# Configuración del Entorno de Desarrollo (IDE)
+# ==========================================
+# Archivos de configuración específica del IDE y espacio de trabajo
+.idea/workspace.xml
+.idea/navFolder.xml
+.idea/assetWizardSettings.xml
+.idea/modules.xml
+.idea/caches/
+.idea/libraries/
+
+# ==========================================
+# Archivos Temporales y Cachés
+# ==========================================
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# ==========================================
+# Archivos del Sistema Operativo
+# ==========================================
+Thumbs.db
+Desktop.ini
