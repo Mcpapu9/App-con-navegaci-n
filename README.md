@@ -78,7 +78,7 @@ Para compilar y ejecutar este proyecto en tu equipo:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/tu-usuario/navegacion-papeleria-kotlin.git
+   git clone https://github.com/Mcpapu9/Navegacion-papeleria.git
    ```
 
 2. **Abrir el proyecto:**
