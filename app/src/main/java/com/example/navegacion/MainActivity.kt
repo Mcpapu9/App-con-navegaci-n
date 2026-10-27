@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -45,7 +48,7 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFFF8F9FA)
+                    color = Color(0xFFF0F4F8) // Fondo limpio y suave
                 ) {
                     NavegacionApp()
                 }
@@ -81,7 +84,7 @@ fun NavegacionApp() {
     }
 }
 
-// PANTALLA PRINCIPAL
+// PANTALLA PRINCIPAL - FUMO SHOP
 @Composable
 fun PantallaPrincipal(
     onVerCatalogo: () -> Unit
@@ -93,49 +96,66 @@ fun PantallaPrincipal(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            text = "Mi Papelería",
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF1565C0)
-        )
-        Spacer(modifier = Modifier.height(12.dp))
+        // Insignia visual estilo peluche
+        Box(
+            modifier = Modifier
+                .size(90.dp)
+                .clip(RoundedCornerShape(45.dp))
+                .background(Color(0xFF64B5F6)), // Azul suave tipo Cirno
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "ᗜˬᗜ",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Bienvenido a nuestra tienda",
-            fontSize = 16.sp,
-            color = Color.Gray
+            text = "Fumo Sanctuary",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF1976D2)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "Coleccionables y peluches directos de Gensokyo",
+            fontSize = 14.sp,
+            color = Color(0xFF546E7A)
         )
         Spacer(modifier = Modifier.height(40.dp))
 
         Button(
             onClick = onVerCatalogo,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1976D2)),
             modifier = Modifier
                 .fillMaxWidth(0.7f)
                 .height(50.dp),
             shape = RoundedCornerShape(12.dp)
         ) {
-            Text(text = "Ver Catálogo", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Ver Colección Fumo", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
         }
     }
 }
 
-// PANTALLA DEL CATÁLOGO
+// PANTALLA DEL CATÁLOGO - LISTA VERTICAL (LazyColumn)
 @Composable
 fun CatalogoProductos(
     onRegresar: () -> Unit
 ) {
-    val productos = listOf(
-        Producto("Lápiz", 8.00, R.drawable.lapiz),
-        Producto("Libreta", 45.00, R.drawable.libreta),
-        Producto("Mochila", 350.00, R.drawable.mochila),
-        Producto("Pluma", 12.50, R.drawable.pluma),
-        Producto("Borrador", 5.00, R.drawable.borrador),
-        Producto("Crayolas", 42.70, R.drawable.crayolas),
-        Producto("Juego de Geometría", 95.00, R.drawable.juego),
-        Producto("Goma", 2.50, R.drawable.goma),
-        Producto("Resistol 850", 45.00, R.drawable.resistol),
-        Producto("Marca Textos", 15.00, R.drawable.marcatextos)
+    val fumos = listOf(
+        FumoItem("Cirno Fumo", "La más ⑨ de todas", 750.00, R.drawable.cirno),
+        FumoItem("Reimu Hakurei Fumo", "C gran sacerdotiza", 790.00, R.drawable.reimu),
+        FumoItem("Marisa Kirisame Fumo", "Robando cosas de valor", 790.00, R.drawable.marisa),
+        FumoItem("Youmu Konpaku Fumo", "Mitad jardinera, mitad fumo", 820.00, R.drawable.youmu),
+        FumoItem("Yuyuko Saigyouji Fumo", "Comiendo todo en el nether", 850.00, R.drawable.yuyuko),
+        FumoItem("Sakuya Izayoi Fumo", "Deteniendo el tiempo con estilo", 820.00, R.drawable.sakuya),
+        FumoItem("Koishi Komeiji Fumo", "Subconsciente y feliz", 850.00, R.drawable.koishi),
+        FumoItem("Fumo Llavero", "Para llevarla a todos lados", 250.00, R.drawable.fumo_llavero)
     )
 
     Column(
@@ -144,22 +164,26 @@ fun CatalogoProductos(
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(24.dp))
+
         Text(
-            text = "Catálogo de Productos",
-            fontSize = 24.sp,
+            text = "CATÁLOGO DE FUMOS",
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF1565C0)
+            color = Color(0xFF1976D2),
+            modifier = Modifier.padding(top = 12.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Cambiado de vuelta a LazyColumn para lista vertical tradicional
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(productos) { producto ->
+            items(fumos) { fumo ->
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(14.dp),
@@ -177,34 +201,33 @@ fun CatalogoProductos(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(14.dp)
                         ) {
-                            // Aquí cargamos la imagen directamente desde drawable
                             Image(
-                                painter = painterResource(id = producto.imagenResId),
-                                contentDescription = producto.nombre,
+                                painter = painterResource(id = fumo.imagenResId),
+                                contentDescription = fumo.nombre,
                                 modifier = Modifier
-                                    .size(48.dp)
+                                    .size(52.dp)
                                     .clip(RoundedCornerShape(10.dp)),
                                 contentScale = ContentScale.Crop
                             )
 
                             Column {
                                 Text(
-                                    text = producto.nombre,
-                                    fontSize = 18.sp,
+                                    text = fumo.nombre,
+                                    fontSize = 16.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF212529)
+                                    color = Color(0xFF263238)
                                 )
                                 Text(
-                                    text = "Papelería general",
+                                    text = fumo.descripcion,
                                     fontSize = 12.sp,
-                                    color = Color.Gray
+                                    color = Color(0xFF78909C)
                                 )
                             }
                         }
 
                         Text(
-                            text = "$${String.format("%.2f", producto.precio)}",
-                            fontSize = 18.sp,
+                            text = "$${String.format("%.2f", fumo.precio)}",
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF2E7D32)
                         )
@@ -217,18 +240,21 @@ fun CatalogoProductos(
 
         Button(
             onClick = onRegresar,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF546E7A)),
             modifier = Modifier
                 .fillMaxWidth(0.7f)
                 .height(48.dp),
             shape = RoundedCornerShape(12.dp)
         ) {
-            Text("Regresar al inicio", fontWeight = FontWeight.Bold)
+            Text("Regresar al Inicio", fontWeight = FontWeight.Bold, color = Color.White)
         }
     }
 }
 
-data class Producto(
+// Modelo de datos para los Fumos
+data class FumoItem(
     val nombre: String,
+    val descripcion: String,
     val precio: Double,
     val imagenResId: Int
 )
