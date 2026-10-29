@@ -101,7 +101,7 @@ fun PantallaPrincipal(
             modifier = Modifier
                 .size(90.dp)
                 .clip(RoundedCornerShape(45.dp))
-                .background(Color(0xFF64B5F6)), // Azul suave tipo Cirno
+                .background(Color(0xFF64B5F6)), // Azul suave
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -129,6 +129,7 @@ fun PantallaPrincipal(
         )
         Spacer(modifier = Modifier.height(40.dp))
 
+        // Botón para ver el catálogo
         Button(
             onClick = onVerCatalogo,
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1976D2)),
@@ -155,7 +156,9 @@ fun CatalogoProductos(
         FumoItem("Yuyuko Saigyouji Fumo", "Comiendo todo en el nether", 850.00, R.drawable.yuyuko),
         FumoItem("Sakuya Izayoi Fumo", "Deteniendo el tiempo con estilo", 820.00, R.drawable.sakuya),
         FumoItem("Koishi Komeiji Fumo", "Subconsciente y feliz", 850.00, R.drawable.koishi),
-        FumoItem("Fumo Llavero", "Para llevarla a todos lados", 250.00, R.drawable.fumo_llavero)
+        FumoItem("Fumo Llavero", "Para llevarla a todos lados", 250.00, R.drawable.fumo_llavero),
+        FumoItem("Remilia Scarlet Fumo", "La ama de la mansión carmesí", 890.00, R.drawable.remilia),
+        FumoItem("Flandre Scarlet Fumo", "Poder destructivo en peluche", 920.00, R.drawable.flandre)
     )
 
     Column(
@@ -164,6 +167,7 @@ fun CatalogoProductos(
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Spacer para que no quede pegado hasta arriba
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
@@ -176,7 +180,7 @@ fun CatalogoProductos(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Cambiado de vuelta a LazyColumn para lista vertical tradicional
+        // Columnas con imagen, nombre, descripción y precio
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
@@ -201,6 +205,7 @@ fun CatalogoProductos(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(14.dp)
                         ) {
+                            // Aqui se pinta la imagen
                             Image(
                                 painter = painterResource(id = fumo.imagenResId),
                                 contentDescription = fumo.nombre,
@@ -211,12 +216,14 @@ fun CatalogoProductos(
                             )
 
                             Column {
+                                // Nombre del peluche
                                 Text(
                                     text = fumo.nombre,
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF263238)
                                 )
+                                // Descripción del peluche
                                 Text(
                                     text = fumo.descripcion,
                                     fontSize = 12.sp,
@@ -224,7 +231,7 @@ fun CatalogoProductos(
                                 )
                             }
                         }
-
+                        // Texto del precio
                         Text(
                             text = "$${String.format("%.2f", fumo.precio)}",
                             fontSize = 16.sp,
@@ -238,6 +245,7 @@ fun CatalogoProductos(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Boton para regresar a la pantalla principal
         Button(
             onClick = onRegresar,
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF546E7A)),
@@ -256,5 +264,5 @@ data class FumoItem(
     val nombre: String,
     val descripcion: String,
     val precio: Double,
-    val imagenResId: Int
+    val imagenResId: Int //Se usa int porque Android Studio reconoce las imagenes por id int y no su nombre
 )
